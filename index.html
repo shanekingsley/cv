@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shane — Senior Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0A0A0B;
+    --surface: #111114;
+    --surface2: #18181C;
+    --border: rgba(255,255,255,0.07);
+    --accent: #C8F064;
+    --accent2: #64C8F0;
+    --text: #E8E8E4;
+    --muted: #6B6B72;
+    --dimmed: #3A3A42;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 200px;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.25rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(12px);
+    background: rgba(10,10,11,0.7);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s ease;
+  }
+
+  nav .logo {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  nav a {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 8rem 3rem 4rem;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,240,100,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,240,100,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    transform: perspective(600px) rotateX(10deg);
+    transform-origin: bottom;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(200,240,100,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-glow2 {
+    position: absolute;
+    bottom: 0;
+    left: -5%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(100,200,240,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 13vw, 11rem);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-name span { color: var(--accent); }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+
+  .hero-desc strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 3rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--dimmed);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .scroll-hint::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 3rem;
+    background: linear-gradient(to bottom, var(--dimmed), transparent);
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 7rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-label::before {
+    content: attr(data-num);
+    color: var(--dimmed);
+  }
+
+  .section-heading {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: 0.04em;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 3rem;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-body p {
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.85;
+  }
+
+  .about-body p strong { color: var(--text); font-weight: 500; }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .stat {
+    background: var(--surface);
+    padding: 1.75rem;
+    transition: background 0.2s;
+  }
+
+  .stat:hover { background: var(--surface2); }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+
+  .skill-card {
+    background: var(--surface);
+    padding: 2rem;
+    transition: background 0.25s;
+    cursor: default;
+  }
+
+  .skill-card:hover { background: var(--surface2); }
+
+  .skill-card-icon {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .skill-card-title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    letter-spacing: 0.06em;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    padding: 0.3rem 0.65rem;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .skill-card:hover .tag { border-color: var(--dimmed); color: var(--text); }
+
+  /* ── EXPERIENCE ── */
+  .timeline {
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), var(--dimmed), transparent);
+  }
+
+  .timeline-item {
+    padding-left: 2.5rem;
+    padding-bottom: 3.5rem;
+    position: relative;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -3px;
+    top: 0.5rem;
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  .timeline-period {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--accent2);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-role {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    letter-spacing: 0.05em;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 0.25rem;
+  }
+
+  .timeline-company {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.25rem;
+  }
+
+  .timeline-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .timeline-points li {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .timeline-points li::before {
+    content: '—';
+    color: var(--dimmed);
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .timeline-points li strong { color: var(--text); font-weight: 500; }
+
+  /* ── INDUSTRIES ── */
+  .industries {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .industry-item {
+    background: var(--surface);
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: background 0.2s;
+  }
+
+  .industry-item:hover { background: var(--surface2); }
+
+  .industry-name {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    letter-spacing: 0.06em;
+    color: var(--text);
+  }
+
+  .industry-detail {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── WHAT I BRING ── */
+  .brings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .bring-item {
+    background: var(--surface);
+    padding: 2rem;
+    transition: background 0.25s;
+  }
+
+  .bring-item:hover { background: var(--surface2); }
+
+  .bring-num {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--dimmed);
+    line-height: 1;
+    margin-bottom: 0.75rem;
+    transition: color 0.25s;
+  }
+
+  .bring-item:hover .bring-num { color: var(--accent); }
+
+  .bring-text {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .bring-text strong { color: var(--text); font-weight: 500; }
+
+  /* ── AI SECTION ── */
+  .ai-banner {
+    border: 1px solid var(--border);
+    padding: 3rem;
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-banner::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(100,200,240,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .ai-banner-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 0.06em;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+
+  .ai-banner-body {
+    color: var(--muted);
+    max-width: 600px;
+    line-height: 1.8;
+    font-size: 0.95rem;
+  }
+
+  .ai-banner-body strong { color: var(--accent2); font-weight: 500; }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    text-align: center;
+    padding: 8rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(rgba(200,240,100,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,240,100,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .contact-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-heading {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 7vw, 6rem);
+    letter-spacing: 0.04em;
+    color: var(--text);
+    line-height: 0.95;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .contact-sub {
+    color: var(--muted);
+    max-width: 440px;
+    margin: 0 auto 3rem;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--dimmed);
+    letter-spacing: 0.1em;
+  }
+
+  footer a {
+    color: var(--dimmed);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--accent); }
+
+  /* ── DIVIDER ── */
+  .full-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 3rem;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { display: none; }
+    .hero { padding: 7rem 1.5rem 4rem; }
+    section { padding: 5rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .brings-grid { grid-template-columns: 1fr; }
+    .contact-section { padding: 5rem 1.5rem; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
+    .full-divider { margin: 0 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">S.</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Senior Software Engineer</div>
+    <h1 class="hero-name">SHA<span>NE</span></h1>
+    <div class="hero-title">API · Integration · Solution Design</div>
+    <p class="hero-desc">
+      <strong>13+ years</strong> building systems that connect, scale, and solve real problems.
+      From ERP to healthcare, fintech to education — I work at the intersection of
+      <strong>technical architecture</strong> and <strong>business outcomes</strong>.
+    </p>
+    <div class="hero-ctas">
+      <a href="#experience" class="btn-primary">View my work ↓</a>
+      <a href="#contact" class="btn-ghost">Get in touch</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</div>
+
+<div class="full-divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label" data-num="01">About</div>
+  <h2 class="section-heading reveal">Who I Am</h2>
+  <div class="about-grid">
+    <div class="about-body reveal reveal-delay-1">
+      <p>
+        I'm a senior engineer who's spent over a decade delivering solutions that others called too complex.
+        APIs, integrations, migrations, cloud infrastructure — I've worked across the full technical stack
+        and across multiple industries.
+      </p>
+      <p>
+        These days I'm most energised by <strong>solution design and high-level architecture</strong>:
+        the point where the right technical decision changes a business outcome. I see how systems
+        should connect — often before anyone else in the room has framed the question.
+      </p>
+      <p>
+        I communicate clearly with non-technical people, deliver on what I promise, and tell the truth
+        about what's possible. That combination is rarer than it should be.
+      </p>
+      <p>
+        Alongside my employed work, I take on <strong>freelance projects for small businesses</strong> —
+        building things that genuinely fit their needs rather than forcing them into a template.
+      </p>
+    </div>
+    <div class="about-stats reveal reveal-delay-2">
+      <div class="stat"><div class="stat-num">13+</div><div class="stat-label">Years in industry</div></div>
+      <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Sectors delivered in</div></div>
+      <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Integrations shipped</div></div>
+      <div class="stat"><div class="stat-num">0</div><div class="stat-label">Projects abandoned</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label" data-num="02">Capabilities</div>
+  <h2 class="section-heading reveal">What I Build</h2>
+
+  <div class="skills-grid reveal reveal-delay-1">
+    <div class="skill-card">
+      <div class="skill-card-icon">Architecture</div>
+      <div class="skill-card-title">System Design</div>
+      <div class="skill-tags">
+        <span class="tag">API Design</span>
+        <span class="tag">BFF Pattern</span>
+        <span class="tag">Solution Architecture</span>
+        <span class="tag">Cloud Infra</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">Engineering</div>
+      <div class="skill-card-title">Backend & APIs</div>
+      <div class="skill-tags">
+        <span class="tag">C# / .NET</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">RESTful APIs</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">Integration</div>
+      <div class="skill-card-title">Payments & Systems</div>
+      <div class="skill-tags">
+        <span class="tag">Stripe</span>
+        <span class="tag">CaxtonFX</span>
+        <span class="tag">ERP Systems</span>
+        <span class="tag">Migrations</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">Currently learning</div>
+      <div class="skill-card-title">AI-Augmented Dev</div>
+      <div class="skill-tags">
+        <span class="tag">Claude API</span>
+        <span class="tag">Prompt Engineering</span>
+        <span class="tag">Workflow Automation</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label" data-num="02b" style="margin-top: 3rem;">Industries</div>
+  <div class="industries reveal reveal-delay-2">
+    <div class="industry-item">
+      <div class="industry-name">Healthcare</div>
+      <div class="industry-detail">Private sector · Compliance-aware delivery</div>
+    </div>
+    <div class="industry-item">
+      <div class="industry-name">Education</div>
+      <div class="industry-detail">British Computer Society</div>
+    </div>
+    <div class="industry-item">
+      <div class="industry-name">Construction ERP</div>
+      <div class="industry-detail">Building trade · End-to-end systems</div>
+    </div>
+    <div class="industry-item">
+      <div class="industry-name">Fintech</div>
+      <div class="industry-detail">CaxtonFX · Payment integrations</div>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label" data-num="03">Experience</div>
+  <h2 class="section-heading reveal">Career</h2>
+
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-period">Current Role</div>
+      <div class="timeline-role">Senior Software Engineer</div>
+      <div class="timeline-company">Current Employer · Present</div>
+      <ul class="timeline-points">
+        <li>Design and deliver <strong>complex API and BFF solutions</strong> within mid-size product teams, acting as the technical reference point for integration decisions.</li>
+        <li>Architect and lead <strong>system migrations</strong>, coordinating across infrastructure, backend, and cloud layers for reliable, zero-downtime delivery.</li>
+        <li>Introduce new approaches and tooling that teams adopt — including <strong>AI-assisted development</strong> practices improving velocity and code quality.</li>
+        <li>Translate ambiguous business requirements into clear technical design, <strong>bridging stakeholders and delivery teams</strong>.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item reveal reveal-delay-1">
+      <div class="timeline-period">Prior Roles · Multiple Employers</div>
+      <div class="timeline-role">Software Engineer</div>
+      <div class="timeline-company">Integration & Systems Specialist</div>
+      <ul class="timeline-points">
+        <li>Built and maintained <strong>ERP integrations for the building trade</strong>, handling complex data flows between line-of-business systems and external platforms.</li>
+        <li>Delivered bespoke solutions for <strong>private healthcare clients</strong>, navigating compliance requirements alongside technical delivery.</li>
+        <li>Developed technical platforms in partnership with the <strong>British Computer Society</strong> in the education sector.</li>
+        <li>Implemented <strong>payment integrations</strong> including Stripe and CaxtonFX — PCI-compliant, reliable, production-grade.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item reveal reveal-delay-2">
+      <div class="timeline-period">Independent · Ongoing</div>
+      <div class="timeline-role">Freelance Developer</div>
+      <div class="timeline-company">Small Business Clients</div>
+      <ul class="timeline-points">
+        <li>Build tailored web solutions for small businesses where <strong>off-the-shelf products fall short</strong>.</li>
+        <li>Handle the full engagement — requirements, design, delivery, and ongoing support — as a <strong>single trusted contact</strong>.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- WHAT I BRING -->
+<section id="strengths">
+  <div class="section-label" data-num="04">Strengths</div>
+  <h2 class="section-heading reveal">What I Bring</h2>
+  <div class="brings-grid reveal reveal-delay-1">
+    <div class="bring-item">
+      <div class="bring-num">01</div>
+      <div class="bring-text"><strong>Systems thinking before the whiteboard.</strong> I see how things should connect — before the architecture meeting, before others have framed the question.</div>
+    </div>
+    <div class="bring-item">
+      <div class="bring-num">02</div>
+      <div class="bring-text"><strong>A track record of doing the hard thing.</strong> Delivered integrations and migrations others considered too complex, across multiple industries and team sizes.</div>
+    </div>
+    <div class="bring-item">
+      <div class="bring-num">03</div>
+      <div class="bring-text"><strong>Honest communication.</strong> I explain complex things clearly to non-technical people. No jargon, no overselling, no surprises at delivery.</div>
+    </div>
+    <div class="bring-item">
+      <div class="bring-num">04</div>
+      <div class="bring-text"><strong>Reliability.</strong> I finish what I start and tell the truth about what's possible. That combination is rarer than it should be.</div>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- AI SECTION -->
+<section>
+  <div class="section-label" data-num="05">Right Now</div>
+  <div class="ai-banner reveal">
+    <div class="ai-banner-title">Learning in Public</div>
+    <p class="ai-banner-body">
+      I'm actively exploring how <strong>AI tools augment the work of an experienced engineer</strong> —
+      not replacing judgment, but multiplying what one person can deliver. Experimenting with the
+      Claude API, building automations, and applying these tools to real client work.
+      This site is part of that journey.
+    </p>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-label">Let's talk</div>
+  <h2 class="contact-heading reveal">Got a<br>project?</h2>
+  <p class="contact-sub reveal reveal-delay-1">
+    Whether you need something built, something integrated, or someone to help you
+    work out what you actually need — get in touch.
+  </p>
+  <div class="reveal reveal-delay-2" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+    <a href="mailto:hello@craftedbycode.co.uk" class="btn-primary">hello@craftedbycode.co.uk</a>
+    <a href="https://linkedin.com/in/shane" class="btn-ghost" target="_blank">LinkedIn ↗</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Shane · <a href="https://craftedbycode.co.uk">craftedbycode.co.uk</a></p>
+  <p>Built with intention. No templates harmed.</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Subtle parallax on hero elements
+  const heroGrid = document.querySelector('.hero-grid');
+  const heroGlow = document.querySelector('.hero-glow');
+  const heroGlow2 = document.querySelector('.hero-glow2');
+  const heroContent = document.querySelector('.hero-content');
+
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y < window.innerHeight) {
+      heroGrid.style.transform = `perspective(600px) rotateX(10deg) translateY(${y * 0.15}px)`;
+      heroGlow.style.transform = `translateY(${y * 0.08}px)`;
+      heroGlow2.style.transform = `translateY(${y * 0.05}px)`;
+      heroContent.style.transform = `translateY(${y * 0.12}px)`;
+      heroContent.style.opacity = 1 - (y / (window.innerHeight * 0.7));
+    }
+  }, { passive: true });
+
+  // Nav active state
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.background = window.scrollY > 60
+      ? 'rgba(10,10,11,0.92)'
+      : 'rgba(10,10,11,0.7)';
+  }, { passive: true });
+</script>
+</body>
+</html>
