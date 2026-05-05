@@ -5,23 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shane Kingsley — Senior Engineer & Solution Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #0A0A0B;
-    --surface: #111114;
-    --surface2: #18181C;
-    --border: rgba(255,255,255,0.07);
-    --accent: #C8F064;
-    --accent2: #64C8F0;
-    --text: #E8E8E4;
-    --muted: #6B6B72;
-    --dimmed: #3A3A42;
+    --bg:       #0D1117;
+    --surface:  #161B22;
+    --surface2: #1C2330;
+    --border:   rgba(255,255,255,0.08);
+    --border2:  rgba(255,255,255,0.14);
+    --accent:   #4A90D9;
+    --accent2:  #6BAED6;
+    --accent-glow: rgba(74,144,217,0.12);
+    --text:     #E6EDF3;
+    --muted:    #8B949E;
+    --dimmed:   #3D444D;
     --font-display: 'Bebas Neue', sans-serif;
-    --font-body: 'DM Sans', sans-serif;
-    --font-mono: 'DM Mono', monospace;
+    --font-body:    'Inter', sans-serif;
+    --font-mono:    'JetBrains Mono', monospace;
   }
 
   html { scroll-behavior: smooth; }
@@ -30,7 +32,8 @@
     background: var(--bg);
     color: var(--text);
     font-family: var(--font-body);
-    font-weight: 300;
+    font-weight: 400;
+    font-size: 16px;
     line-height: 1.7;
     overflow-x: hidden;
   }
@@ -44,7 +47,7 @@
     background-size: 200px;
     pointer-events: none;
     z-index: 1000;
-    opacity: 0.4;
+    opacity: 0.35;
   }
 
   /* ── NAV ── */
@@ -52,40 +55,36 @@
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    padding: 1.25rem 3rem;
+    padding: 1.1rem 3rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    backdrop-filter: blur(12px);
-    background: rgba(10,10,11,0.7);
+    backdrop-filter: blur(16px);
+    background: rgba(13,17,23,0.8);
     border-bottom: 1px solid var(--border);
-    transition: all 0.3s ease;
+    transition: background 0.3s ease;
   }
 
   nav .logo {
     font-family: var(--font-display);
-    font-size: 1.4rem;
-    letter-spacing: 0.1em;
+    font-size: 1.5rem;
+    letter-spacing: 0.12em;
     color: var(--accent);
   }
 
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 2.5rem;
-  }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
 
   nav a {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     color: var(--muted);
     text-decoration: none;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     transition: color 0.2s;
   }
 
-  nav a:hover { color: var(--accent); }
+  nav a:hover { color: var(--text); }
 
   /* ── HERO ── */
   .hero {
@@ -101,8 +100,8 @@
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(200,240,100,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(200,240,100,0.03) 1px, transparent 1px);
+      linear-gradient(rgba(74,144,217,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,144,217,0.04) 1px, transparent 1px);
     background-size: 60px 60px;
     transform: perspective(600px) rotateX(10deg);
     transform-origin: bottom;
@@ -110,29 +109,21 @@
 
   .hero-glow {
     position: absolute;
-    top: -20%;
-    right: -10%;
-    width: 700px;
-    height: 700px;
-    background: radial-gradient(circle, rgba(200,240,100,0.06) 0%, transparent 70%);
+    top: -20%; right: -10%;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(74,144,217,0.08) 0%, transparent 65%);
     pointer-events: none;
   }
 
   .hero-glow2 {
     position: absolute;
-    bottom: 0;
-    left: -5%;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(100,200,240,0.05) 0%, transparent 70%);
+    bottom: 0; left: -5%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(107,174,214,0.05) 0%, transparent 65%);
     pointer-events: none;
   }
 
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 900px;
-  }
+  .hero-content { position: relative; z-index: 2; max-width: 900px; }
 
   .hero-eyebrow {
     font-family: var(--font-mono);
@@ -149,14 +140,13 @@
   .hero-eyebrow::before {
     content: '';
     display: block;
-    width: 2rem;
-    height: 1px;
+    width: 2rem; height: 1px;
     background: var(--accent);
   }
 
   .hero-name {
     font-family: var(--font-display);
-    font-size: clamp(5rem, 13vw, 11rem);
+    font-size: clamp(4.5rem, 13vw, 10rem);
     line-height: 0.9;
     letter-spacing: 0.02em;
     color: var(--text);
@@ -167,8 +157,8 @@
 
   .hero-title {
     font-family: var(--font-display);
-    font-size: clamp(1.4rem, 3vw, 2.2rem);
-    letter-spacing: 0.12em;
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+    letter-spacing: 0.14em;
     color: var(--muted);
     margin-bottom: 2rem;
   }
@@ -177,51 +167,47 @@
     font-size: 1.05rem;
     color: var(--muted);
     max-width: 560px;
-    line-height: 1.8;
+    line-height: 1.85;
     margin-bottom: 3rem;
+    font-weight: 400;
   }
 
-  .hero-desc strong {
-    color: var(--text);
-    font-weight: 500;
-  }
+  .hero-desc strong { color: var(--text); font-weight: 600; }
 
-  .hero-ctas {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
 
   .btn-primary {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.85rem 2rem;
+    padding: 0.8rem 1.75rem;
     background: var(--accent);
-    color: var(--bg);
+    color: #fff;
     font-family: var(--font-mono);
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     font-weight: 500;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     text-decoration: none;
-    transition: transform 0.2s, opacity 0.2s;
+    border-radius: 3px;
+    transition: background 0.2s, transform 0.2s;
   }
 
-  .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
 
   .btn-ghost {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.85rem 2rem;
-    border: 1px solid var(--border);
+    padding: 0.8rem 1.75rem;
+    border: 1px solid var(--border2);
     color: var(--muted);
     font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.1em;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     text-decoration: none;
+    border-radius: 3px;
     transition: border-color 0.2s, color 0.2s;
   }
 
@@ -229,10 +215,9 @@
 
   .scroll-hint {
     position: absolute;
-    bottom: 2.5rem;
-    left: 3rem;
+    bottom: 2.5rem; left: 3rem;
     font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     color: var(--dimmed);
     letter-spacing: 0.15em;
     text-transform: uppercase;
@@ -244,14 +229,13 @@
   .scroll-hint::after {
     content: '';
     display: block;
-    width: 1px;
-    height: 3rem;
+    width: 1px; height: 3rem;
     background: linear-gradient(to bottom, var(--dimmed), transparent);
   }
 
   /* ── SECTIONS ── */
   section {
-    padding: 7rem 3rem;
+    padding: 6rem 3rem;
     max-width: 1100px;
     margin: 0 auto;
   }
@@ -260,9 +244,9 @@
     font-family: var(--font-mono);
     font-size: 0.68rem;
     color: var(--accent);
-    letter-spacing: 0.25em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -275,41 +259,44 @@
 
   .section-heading {
     font-family: var(--font-display);
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
     letter-spacing: 0.04em;
     color: var(--text);
     line-height: 1;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
   }
 
   /* ── ABOUT ── */
   .about-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 3fr 2fr;
     gap: 4rem;
     align-items: start;
   }
 
   .about-body p {
     color: var(--muted);
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.1rem;
     font-size: 1rem;
     line-height: 1.85;
   }
 
-  .about-body p strong { color: var(--text); font-weight: 500; }
+  .about-body p strong { color: var(--text); font-weight: 600; }
 
+  /* Stats as 2x2 grid */
   .about-stats {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1px;
     background: var(--border);
     border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
   }
 
   .stat {
     background: var(--surface);
-    padding: 1.75rem;
+    padding: 1.5rem 1.75rem;
     transition: background 0.2s;
   }
 
@@ -317,137 +304,178 @@
 
   .stat-num {
     font-family: var(--font-display);
-    font-size: 3rem;
+    font-size: 2.4rem;
     color: var(--accent);
     line-height: 1;
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.2rem;
   }
 
   .stat-label {
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.66rem;
     color: var(--muted);
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
   }
 
   /* ── SKILLS ── */
+  /* Cards stacked vertically — no tabular grid that breaks on mobile */
   .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 1px;
-    background: var(--border);
     border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
     margin-bottom: 3rem;
   }
 
   .skill-card {
     background: var(--surface);
-    padding: 2rem;
-    transition: background 0.25s;
-    cursor: default;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
   }
 
+  .skill-card:last-child { border-bottom: none; }
   .skill-card:hover { background: var(--surface2); }
 
   .skill-card-icon {
     font-family: var(--font-mono);
     font-size: 0.65rem;
     color: var(--accent);
-    letter-spacing: 0.15em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    margin-bottom: 0.75rem;
+    min-width: 110px;
+    padding-top: 0.15rem;
   }
 
   .skill-card-title {
     font-family: var(--font-display);
-    font-size: 1.4rem;
-    letter-spacing: 0.06em;
+    font-size: 1.25rem;
+    letter-spacing: 0.04em;
     color: var(--text);
-    margin-bottom: 1rem;
+    min-width: 160px;
   }
 
   .skill-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.4rem;
+    flex: 1;
   }
 
   .tag {
     font-family: var(--font-mono);
     font-size: 0.65rem;
-    padding: 0.3rem 0.65rem;
-    border: 1px solid var(--border);
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--border2);
+    border-radius: 3px;
     color: var(--muted);
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
     transition: border-color 0.2s, color 0.2s;
   }
 
-  .skill-card:hover .tag { border-color: var(--dimmed); color: var(--text); }
+  .skill-card:hover .tag { border-color: var(--accent); color: var(--text); }
 
-  /* ── EXPERIENCE ── */
-  .timeline {
-    position: relative;
+  /* ── INDUSTRIES ── */
+  /* Simple wrapping flex — no forced columns that snap oddly */
+  .industries {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
   }
+
+  .industry-item {
+    background: var(--surface);
+    padding: 1.4rem 1.75rem;
+    flex: 1 1 200px;
+    transition: background 0.2s;
+  }
+
+  .industry-item:hover { background: var(--surface2); }
+
+  .industry-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+
+  .industry-detail {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; }
 
   .timeline::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 0.5rem;
-    bottom: 0;
+    left: 0; top: 0.5rem; bottom: 0;
     width: 1px;
-    background: linear-gradient(to bottom, var(--accent), var(--dimmed), transparent);
+    background: linear-gradient(to bottom, var(--accent), var(--dimmed) 80%, transparent);
   }
 
   .timeline-item {
-    padding-left: 2.5rem;
-    padding-bottom: 3.5rem;
+    padding-left: 2.25rem;
+    padding-bottom: 3rem;
     position: relative;
   }
 
   .timeline-item::before {
     content: '';
     position: absolute;
-    left: -3px;
-    top: 0.5rem;
-    width: 7px;
-    height: 7px;
+    left: -3px; top: 0.45rem;
+    width: 7px; height: 7px;
     background: var(--accent);
     border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent);
   }
 
   .timeline-period {
     font-family: var(--font-mono);
     font-size: 0.68rem;
     color: var(--accent2);
-    letter-spacing: 0.15em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.35rem;
   }
 
   .timeline-role {
     font-family: var(--font-display);
-    font-size: 1.8rem;
-    letter-spacing: 0.05em;
+    font-size: 1.65rem;
+    letter-spacing: 0.04em;
     color: var(--text);
     line-height: 1.1;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.2rem;
   }
 
   .timeline-company {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     color: var(--muted);
-    letter-spacing: 0.1em;
-    margin-bottom: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
   }
 
   .timeline-points {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 0.55rem;
   }
 
   .timeline-points li {
@@ -455,93 +483,70 @@
     gap: 0.75rem;
     font-size: 0.95rem;
     color: var(--muted);
-    line-height: 1.6;
+    line-height: 1.65;
   }
 
   .timeline-points li::before {
-    content: '—';
-    color: var(--dimmed);
+    content: '·';
+    color: var(--accent);
     flex-shrink: 0;
-    margin-top: 0.1rem;
-  }
-
-  .timeline-points li strong { color: var(--text); font-weight: 500; }
-
-  /* ── INDUSTRIES ── */
-  .industries {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-  }
-
-  .industry-item {
-    background: var(--surface);
-    padding: 2rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    transition: background 0.2s;
-  }
-
-  .industry-item:hover { background: var(--surface2); }
-
-  .industry-name {
-    font-family: var(--font-display);
     font-size: 1.2rem;
-    letter-spacing: 0.06em;
-    color: var(--text);
+    line-height: 1.4;
   }
 
-  .industry-detail {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-  }
+  .timeline-points li strong { color: var(--text); font-weight: 600; }
 
   /* ── WHAT I BRING ── */
+  /* Single column stacked cards — clean on all screens */
   .brings-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 1px;
-    background: var(--border);
     border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
   }
 
   .bring-item {
     background: var(--surface);
-    padding: 2rem;
-    transition: background 0.25s;
+    padding: 1.75rem 2rem;
+    display: flex;
+    gap: 1.75rem;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
   }
 
+  .bring-item:last-child { border-bottom: none; }
   .bring-item:hover { background: var(--surface2); }
 
   .bring-num {
     font-family: var(--font-display);
-    font-size: 3rem;
+    font-size: 2rem;
     color: var(--dimmed);
     line-height: 1;
-    margin-bottom: 0.75rem;
+    min-width: 2.5rem;
     transition: color 0.25s;
+    padding-top: 0.1rem;
   }
 
   .bring-item:hover .bring-num { color: var(--accent); }
 
   .bring-text {
-    font-size: 0.95rem;
+    font-size: 0.975rem;
     color: var(--muted);
-    line-height: 1.7;
+    line-height: 1.75;
   }
 
-  .bring-text strong { color: var(--text); font-weight: 500; }
+  .bring-text strong { color: var(--text); font-weight: 600; }
 
   /* ── AI SECTION ── */
   .ai-banner {
     border: 1px solid var(--border);
-    padding: 3rem;
+    border-left: 3px solid var(--accent);
+    padding: 2.5rem 3rem;
     background: var(--surface);
+    border-radius: 0 6px 6px 0;
     position: relative;
     overflow: hidden;
   }
@@ -550,27 +555,27 @@
     content: '';
     position: absolute;
     top: 0; right: 0;
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(100,200,240,0.08) 0%, transparent 70%);
+    width: 300px; height: 200px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
     pointer-events: none;
   }
 
   .ai-banner-title {
     font-family: var(--font-display);
-    font-size: 2rem;
+    font-size: 1.8rem;
     letter-spacing: 0.06em;
     color: var(--text);
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
   }
 
   .ai-banner-body {
     color: var(--muted);
-    max-width: 600px;
+    max-width: 640px;
     line-height: 1.8;
-    font-size: 0.95rem;
+    font-size: 0.975rem;
   }
 
-  .ai-banner-body strong { color: var(--accent2); font-weight: 500; }
+  .ai-banner-body strong { color: var(--accent2); font-weight: 600; }
 
   /* ── CONTACT ── */
   .contact-section {
@@ -582,11 +587,10 @@
 
   .contact-section::before {
     content: '';
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background:
-      linear-gradient(rgba(200,240,100,0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(200,240,100,0.02) 1px, transparent 1px);
+      linear-gradient(rgba(74,144,217,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,144,217,0.025) 1px, transparent 1px);
     background-size: 40px 40px;
   }
 
@@ -594,14 +598,14 @@
     font-family: var(--font-mono);
     font-size: 0.68rem;
     color: var(--accent);
-    letter-spacing: 0.25em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     margin-bottom: 1.5rem;
   }
 
   .contact-heading {
     font-family: var(--font-display);
-    font-size: clamp(3rem, 7vw, 6rem);
+    font-size: clamp(3rem, 6vw, 5.5rem);
     letter-spacing: 0.04em;
     color: var(--text);
     line-height: 0.95;
@@ -611,7 +615,7 @@
 
   .contact-sub {
     color: var(--muted);
-    max-width: 440px;
+    max-width: 420px;
     margin: 0 auto 3rem;
     font-size: 1rem;
     line-height: 1.8;
@@ -620,7 +624,7 @@
   /* ── FOOTER ── */
   footer {
     border-top: 1px solid var(--border);
-    padding: 2rem 3rem;
+    padding: 1.75rem 3rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -630,51 +634,42 @@
     font-family: var(--font-mono);
     font-size: 0.65rem;
     color: var(--dimmed);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
   }
 
-  footer a {
-    color: var(--dimmed);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
+  footer a { color: var(--dimmed); text-decoration: none; transition: color 0.2s; }
   footer a:hover { color: var(--accent); }
 
   /* ── DIVIDER ── */
-  .full-divider {
-    height: 1px;
-    background: var(--border);
-    margin: 0 3rem;
-  }
+  .full-divider { height: 1px; background: var(--border); margin: 0 3rem; }
 
   /* ── SCROLL REVEAL ── */
   .reveal {
     opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
+    transform: translateY(24px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
   }
 
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
+  .reveal.visible { opacity: 1; transform: translateY(0); }
   .reveal-delay-1 { transition-delay: 0.1s; }
   .reveal-delay-2 { transition-delay: 0.2s; }
   .reveal-delay-3 { transition-delay: 0.3s; }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
+    nav { padding: 1rem 1.25rem; }
     nav ul { display: none; }
-    .hero { padding: 7rem 1.5rem 4rem; }
-    section { padding: 5rem 1.5rem; }
+    .hero { padding: 6.5rem 1.25rem 3.5rem; }
+    section { padding: 4.5rem 1.25rem; }
     .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .brings-grid { grid-template-columns: 1fr; }
-    .contact-section { padding: 5rem 1.5rem; }
-    footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; text-align: center; }
-    .full-divider { margin: 0 1.5rem; }
+    .skill-card { flex-direction: column; gap: 0.5rem; padding: 1.25rem; }
+    .skill-card-icon, .skill-card-title { min-width: unset; }
+    .bring-item { gap: 1rem; }
+    .ai-banner { padding: 1.75rem; }
+    .contact-section { padding: 5rem 1.25rem; }
+    footer { padding: 1.25rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    .full-divider { margin: 0 1.25rem; }
+    .scroll-hint { left: 1.25rem; }
   }
 </style>
 </head>
@@ -839,10 +834,10 @@
       <div class="timeline-role">Senior .NET Developer</div>
       <div class="timeline-company">Spire Healthcare Group plc · Remote</div>
       <ul class="timeline-points">
-        <li>Delivering backend solutions within a large private healthcare group, working across <strong>Microsoft Azure</strong> infrastructure and .NET services at scale.</li>
+        <li>Delivering backend solutions within a large private healthcare group, working across Microsoft Azure infrastructure and .NET services at scale.</li>
         <li>Acting as a technical reference point for integration decisions across mid-size product teams, bridging complex requirements and delivery.</li>
-        <li>Translate ambiguous business requirements into clear technical design, <strong>bridging stakeholders and delivery teams</strong>.</li>
-        <li>Actively introducing <strong>AI-assisted development</strong> practices to improve team velocity and code quality.</li>
+        <li>Translating ambiguous business requirements into clear technical design, bridging stakeholders and delivery teams.</li>
+        <li>Actively introducing AI-assisted development practices to improve team velocity and code quality.</li>
       </ul>
     </div>
 
@@ -852,8 +847,8 @@
       <div class="timeline-company">ECI Software Solutions (formerly eCommonSense)</div>
       <ul class="timeline-points">
         <li>Promoted to Senior Integration Engineer following ECI's acquisition of eCommonSense, where the integration platform I worked on was a core part of the acquired asset.</li>
-        <li>Built and maintained a <strong>cloud-first integration platform</strong> connecting a Magento commerce UI to multiple ERP backend systems, designing the connector layer for each.</li>
-        <li>Worked across complex data flows in the building trade sector, handling <strong>real-time sync, order management, and stock integration</strong> at scale.</li>
+        <li>Built and maintained a cloud-first integration platform connecting a Magento commerce UI to multiple ERP backend systems, designing the connector layer for each.</li>
+        <li>Worked across complex data flows in the building trade sector, handling real-time sync, order management, and stock integration at scale.</li>
       </ul>
     </div>
 
@@ -862,8 +857,8 @@
       <div class="timeline-role">Lead Solutions Architect / Senior Software Engineer</div>
       <div class="timeline-company">BCS, The Chartered Institute for IT · Swindon</div>
       <ul class="timeline-points">
-        <li>Progressed from Software Engineer to <strong>Lead Solutions Architect</strong> over 7 years, taking ownership of technical design and architectural decisions for in-house systems.</li>
-        <li>Led design and execution of scalable business systems, owning architectural decisions across the full stack including <strong>C# .NET Core, ASP.NET Core, MVC, and AWS Cloud services</strong>.</li>
+        <li>Progressed from Software Engineer to Lead Solutions Architect over 7 years, taking ownership of technical design and architectural decisions for in-house systems.</li>
+        <li>Led design and execution of scalable business systems, owning architectural decisions across the full stack including C# .NET Core, ASP.NET Core, MVC, and AWS Cloud services.</li>
         <li>Responsible for integration problem solving across multiple internal platforms, and maintaining currency with industry standards for cloud-based web applications.</li>
         <li>Delivered solutions across membership, examination, and accreditation systems for one of the UK's leading IT professional bodies.</li>
       </ul>
@@ -874,8 +869,8 @@
       <div class="timeline-role">Software Developer</div>
       <div class="timeline-company">Caxton FX · Swindon</div>
       <ul class="timeline-points">
-        <li>Built fintech web applications in <strong>ASP.NET, C#, MVC 4/5 and SQL Server</strong> within a fast-moving foreign exchange environment.</li>
-        <li>Early exposure to <strong>financial services delivery</strong> standards, data integrity requirements, and payment platform integration.</li>
+        <li>Built fintech web applications in ASP.NET, C#, MVC 4/5 and SQL Server within a fast-moving foreign exchange environment.</li>
+        <li>Early exposure to financial services delivery standards, data integrity requirements, and payment platform integration.</li>
       </ul>
     </div>
 
@@ -884,7 +879,7 @@
       <div class="timeline-role">UI Designer & Frontend Developer</div>
       <div class="timeline-company">Applied Card Technologies</div>
       <ul class="timeline-points">
-        <li>Delivered <strong>UX design, usability testing, and front-end web application development</strong> in Java, establishing a grounding in user-centred design that informs technical decisions today.</li>
+        <li>Delivered UX design, usability testing, and front-end web application development in Java, establishing a grounding in user-centred design that informs technical decisions today.</li>
       </ul>
     </div>
 
@@ -893,7 +888,7 @@
       <div class="timeline-role">Analyst / Software Engineer</div>
       <div class="timeline-company">GL Garrad Hassan</div>
       <ul class="timeline-points">
-        <li>Early-career engineering role covering <strong>.NET, WCF/WPF, VB development, and requirements capture</strong> in a technical consultancy environment.</li>
+        <li>Early-career engineering role covering .NET, WCF/WPF, VB development, and requirements capture in a technical consultancy environment.</li>
       </ul>
     </div>
 
@@ -903,7 +898,7 @@
       <div class="timeline-company">Small Business Clients</div>
       <ul class="timeline-points">
         <li>Build tailored web solutions for small businesses where off-the-shelf products fall short.</li>
-        <li>Handle the full engagement: requirements, design, delivery, and ongoing support, as a <strong>single trusted contact</strong>.</li>
+        <li>Handle the full engagement: requirements, design, delivery, and ongoing support, as a single trusted contact.</li>
       </ul>
     </div>
 
@@ -922,7 +917,7 @@
       <div class="timeline-role">BSc (Hons) Computer Science — First Class</div>
       <div class="timeline-company">University of Bath</div>
       <ul class="timeline-points">
-        <li>First class honours degree in Computer Science from a <strong>Russell Group university</strong>, providing the academic foundation for 13+ years of engineering practice.</li>
+        <li>First class honours degree in Computer Science from a Russell Group university, providing the academic foundation for 13+ years of engineering practice.</li>
       </ul>
     </div>
   </div>
@@ -1021,8 +1016,8 @@
   const nav = document.querySelector('nav');
   window.addEventListener('scroll', () => {
     nav.style.background = window.scrollY > 60
-      ? 'rgba(10,10,11,0.92)'
-      : 'rgba(10,10,11,0.7)';
+      ? 'rgba(13,17,23,0.95)'
+      : 'rgba(13,17,23,0.8)';
   }, { passive: true });
 </script>
 </body>
